@@ -1,0 +1,40 @@
+<md-card *ngIf="!user;else signedInTemplate" fxLayoutAlign="none center">
+  <md-card-content>
+    You are not signed in.
+  </md-card-content>
+</md-card>
+
+<ng-template #signedInTemplate>
+  <md-card fxLayout="column" fxLayoutAlign="center center">
+    <md-card-content>
+      Signed in with phone number: {{user.phoneNumber}}.
+    </md-card-content>
+    <button md-raised-button color="accent" (click)="signOut()"> Sign Out</button>
+  </md-card>
+</ng-template>
+
+<br>
+
+<md-card>
+  <md-card-title fxLayoutAlign="center center">
+    Phone number authentication
+  </md-card-title>
+
+  <md-card-content fxLayoutAlign="none end" fxLayout="column">
+    <md-input-container>
+      <input mdInput name="phoneNumber" [(ngModel)]="phoneNumber" required placeholder="Phone number (example +17203347437)">
+    </md-input-container>
+
+    <div fxLayoutAlign="end center" id="recaptcha"></div>
+
+    <button md-raised-button color="primary" (click)="signInWithPhoneNumber()">Send code</button>
+
+    <md-input-container>
+      <input mdInput type="text" placeholder="Confirmation code" required [(ngModel)]="code" name="code">
+    </md-input-container>
+
+    <button md-raised-button color="accent" (click)="signInWithCode()">Sign in</button>
+
+  </md-card-content>
+
+</md-card>
